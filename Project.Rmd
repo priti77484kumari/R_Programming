@@ -1,0 +1,69 @@
+---
+title: "Project"
+author: "Priti Kumari"
+date: "2024-05-21"
+output: html_document
+---
+
+## Hello this is my R_Progamming project on "Dc_marvel_movie_performance Analysis" .
+<!--
+```{r}
+library(rmarkdown)
+library(plotly)
+library(ggplot2)
+library(dplyr)
+```
+
+
+```{r}
+project<-read.csv("C:/Users/hp/OneDrive/Desktop/Data Science/Dataset/dc_marvel_movie_performance.csv")
+
+```
+
+-->
+### Here is the no of rows and columns
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+nrow(project)
+ncol(project)
+```
+
+
+### This shows time_in_minutes for the movie
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(data=project,aes(x=Minutes))+ geom_histogram(fill="blue",col="Yellow")
+
+```
+
+
+
+### This shows tha main lead whether male or female
+
+```{r echo=FALSE, message=TRUE, warning=FALSE}
+ggplot(data=project,aes(x=,Male.Female.led,fill=Male.Female.led))+geom_bar()+geom_text(stat = "count", aes(label = ..count..), vjust = -0.5) +
+  labs(x = "Lead Gender", y = "Count", title = "Number of Films by Lead Gender") 
+
+```
+
+### This show top_5_ratings movie
+```{r echo=FALSE, fig.width=10, message=FALSE, warning=FALSE}
+top5_ratings<-head(project[order(project$Rotten.Tomatoes.Critic.Score, decreasing = TRUE), ], 5)
+ggplot(data=top5_ratings, aes(x=reorder(Film, Rotten.Tomatoes.Critic.Score), y=Rotten.Tomatoes.Critic.Score,fill=Film)) +
+  geom_bar(stat="identity") +
+  labs(x="Film", y="Rating", title="Top 5 Films by Rating", fill="Film") 
+  
+
+```
+
+
+### This show top_5_gross movie
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+top5_gross <-head(project[order(project$Box.office.gross.Worldwide,decreasing = TRUE),],5) 
+ggplot(data=top5_gross, aes(x=Franchise, y=Box.office.gross.Worldwide, fill=Film)) +
+  geom_bar(stat="identity") +
+  labs(x="Film", y="Worldwide Box Office Gross", title="Top 10 Films by Worldwide Box Office Gross", fill="Franchise") 
+
+
+ 
+```
+
